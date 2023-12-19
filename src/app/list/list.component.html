@@ -1,0 +1,33 @@
+<div class="form">
+  <h2>Add Task</h2>
+  <form (ngSubmit)="addTask()">
+    <label for="description">Description</label><br>
+    <input type="text" id="description" [(ngModel)]="newTask.description" name="description" required><br>
+    <button type="submit" class="btn1">Submit</button>
+  </form>
+  <br>
+  <br>
+  <h2>My Tasks</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Start Date</th>
+        <th>Completion Date</th>
+        <th>Completed?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of taskList;">
+        <td>{{ task.description }}</td>
+        <td>{{ task.createdDate | date: 'short' }}</td>
+        <td>{{ task.completedDate | date: 'short' }}</td>
+        <td><input type="checkbox" [(ngModel)]="task.isCompleted" (change)="updateTask(task?.id,task); markCompleted(task)"></td>
+        <td><button (click)="deleteTask(task?.id)" class="btn2">Delete</button></td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
